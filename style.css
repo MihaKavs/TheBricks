@@ -3,6 +3,10 @@ body{
     text-align: center;
     display: flex;
   }
+  html{
+    height: 100%;
+    background-image: linear-gradient(to bottom, rgba(255, 229, 12, 0.7), rgba(0,0,0,0))
+  }
 .center{
     position: absolute;
     left: 5%;
@@ -11,7 +15,7 @@ body{
     width: 60%;
     border: 2px solid black;
     border-radius: 0.5em;
-
+    background-image: linear-gradient(to bottom, rgba(255, 229, 12, 0.7), rgba(0,0,0,0));
 }
 .score{
     position: absolute;
@@ -31,6 +35,7 @@ body{
     width: 15%;
     border: 2px solid black;
     border-radius: 0.5em;
+    background-image: linear-gradient(to bottom, rgba(255, 229, 12, 0.7), rgba(0,0,0,0));
 }
 .points{
     position: absolute;
@@ -123,7 +128,7 @@ body{
     height:100%;
     width: 100%;
     top: 0%;
-    background-image: url(img/slider.jpg);
+    background-image: url(img/slider.jpg), linear-gradient(to bottom, rgba(255, 229, 12, 0.7), rgba(0,0,0,0));
     background-position-y: -200%;
     background-repeat: no-repeat;
     border-radius: 0.5em;
