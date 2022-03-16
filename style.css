@@ -133,3 +133,7 @@ body{
     background-repeat: no-repeat;
     border-radius: 0.5em;
 }
+canvas{
+    height: 100%;
+    width: 100%;
+}

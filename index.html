@@ -8,22 +8,23 @@
     <link rel="shortcut icon" href="img/beer.png" type="image/x-icon">
     <link rel="icon" href="img/beer.png" type="image/x-icon">
 </head>
-<body>
+<body onload="drawIt()">
     <div class="title">
         Drinking bricks!
     </div>
     <div class="center">
-
+        <canvas id="canvas" width="800" height="800"></canvas>
+        <script src="js/script.js"></script>
     </div>
     <div class="score">
     <div class="pivo"></div>
     </div>
     <div class="scoreboard">
-        <div class="points fontStyling">
-            Points:
+        <div id="tocke" class="points fontStyling">
+            Points: 0
         </div>
-        <div class="time fontStyling">
-            Time:
+        <div id="cas" class="time fontStyling">
+            Time: 00:00
         </div>
         <div class="wine fontStyling">
             5   points
@@ -41,6 +42,6 @@
 
         </div>
     </div>
-    <script src="js/script.js"></script>
+
 </body>
 </html>
