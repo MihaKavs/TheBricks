@@ -69,20 +69,32 @@ function drawIt() {
     for (i = 0; i < NROWS; i++) {
       for (j = 0; j < NCOLS; j++) {
         if (bricks[i][j] == 1) {
-          ctx.drawImmage(wine,(j*BRICKWIDTH+PADDING)+PADDING,i * (BRICKHEIGHT + PADDING) + PADDING);
+          ctx.drawImage(wine,(j*BRICKWIDTH),i * BRICKHEIGHT ,BRICKWIDTH,BRICKHEIGHT);
+          //rect((j * (BRICKWIDTH + PADDING)) + PADDING,
+            //(i * (BRICKHEIGHT + PADDING)) + PADDING,
+            //BRICKWIDTH, BRICKHEIGHT);
+        }
+		        if (bricks[i][j] == 2) {
+          ctx.drawImage(wine,(j*BRICKWIDTH),i * BRICKHEIGHT ,BRICKWIDTH,BRICKHEIGHT);
+          //rect((j * (BRICKWIDTH + PADDING)) + PADDING,
+            //(i * (BRICKHEIGHT + PADDING)) + PADDING,
+            //BRICKWIDTH, BRICKHEIGHT);
+        }
+		        if (bricks[i][j] == 3) {
+          ctx.drawImage(wine,(j*BRICKWIDTH),i * BRICKHEIGHT ,BRICKWIDTH,BRICKHEIGHT);
           //rect((j * (BRICKWIDTH + PADDING)) + PADDING,
             //(i * (BRICKHEIGHT + PADDING)) + PADDING,
             //BRICKWIDTH, BRICKHEIGHT);
         }
       }
     }
-    rowheight = BRICKHEIGHT + PADDING + r / 2; //Smo zadeli opeko?
-    colwidth = BRICKWIDTH + PADDING + r / 2;
+    rowheight = BRICKHEIGHT  + r / 2; //Smo zadeli opeko?
+    colwidth = BRICKWIDTH  + r / 2;
     row = Math.floor(y / rowheight);
     col = Math.floor(x / colwidth);
     //Če smo zadeli opeko, vrni povratno kroglo in označi v tabeli, da opeke ni več
-    if (y < NROWS * rowheight && row >= 0 && col >= 0 && bricks[row][col] == 1) {
-      dy = -dy; bricks[row][col] = 0;
+    if (y < NROWS * rowheight && row >= 0 && col >= 0 && bricks[row][col] != 0) {
+      dy = -dy; bricks[row][col] -= 1;
       tocke += 1;
       console.log(tocke); //v primeru, da imajo opeko večjo utež lahko prištevate tudi npr. 2 ali 3; pred tem bi bilo smiselno dodati še kakšen pogoj, ki bi signaliziral mesta opek, ki imajo višjo vrednost
       $("#tocke").html("Points: " + tocke);
@@ -160,15 +172,20 @@ var PADDING;
 function initbricks() {
   WIDTH = $("#canvas").width();
   NROWS = 3;
-  NCOLS = 8;
-  BRICKWIDTH = (WIDTH / NCOLS) - 15;
-  BRICKHEIGHT = 15;
+  NCOLS = 15;
+  BRICKWIDTH = (WIDTH / NCOLS) ;
+  BRICKHEIGHT = 80;
   PADDING = 15;
   bricks = new Array(NROWS);
   for (i = 0; i < NROWS; i++) {
     bricks[i] = new Array(NCOLS);
     for (j = 0; j < NCOLS; j++) {
-      bricks[i][j] = 1;
+	  if(i == 0)
+		bricks[i][j] = 3;
+	  else if(i == 2)
+		bricks[i][j] = 2;
+	else 
+		bricks[i][j] = 1;
     }
   }
 }
