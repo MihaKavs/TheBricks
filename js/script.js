@@ -1,6 +1,6 @@
 function creddit() {
   Swal.fire({
-    title: 'Project made by Miha Kavs',
+    title: 'Project made Miha Kavs',
     confirmButtonText: 'Okej',
     color: '#000000',
     confirmButtonColor: '#000000',
@@ -22,7 +22,6 @@ function drawIt() {
     document.getElementById("center").style.width = "60%";
     WIDTH = $("#canvas").width();
     HEIGHT = $("#canvas").height();
-    console.log(WIDTH,HEIGHT);
 
     tocke = 0;
     $("#tocke").html("Points: " + tocke);
@@ -68,23 +67,31 @@ function drawIt() {
     rect(paddlex, HEIGHT - paddleh, paddlew, paddleh);
     for (i = 0; i < NROWS; i++) {
       for (j = 0; j < NCOLS; j++) {
-        if (bricks[i][j] == 1) {
-          ctx.drawImage(wine,(j*BRICKWIDTH),i * BRICKHEIGHT ,BRICKWIDTH,BRICKHEIGHT);
-          //rect((j * (BRICKWIDTH + PADDING)) + PADDING,
-            //(i * (BRICKHEIGHT + PADDING)) + PADDING,
-            //BRICKWIDTH, BRICKHEIGHT);
+        if (i == 0) {
+          if(bricks[i][j] != 0){
+            rect((j * (BRICKWIDTH + PADDING)) + PADDING,
+            (i * (BRICKHEIGHT + PADDING)) + PADDING,
+            BRICKWIDTH, BRICKHEIGHT);
+            //if(j ==  Math.floor(NCOLS/2))
+              //ctx.drawImage(keg,j*BRICKWIDTH,i * BRICKHEIGHT ,BRICKWIDTH,BRICKHEIGHT);
+            //else
+             // ctx.drawImage(beer,j*BRICKWIDTH,i * BRICKHEIGHT ,BRICKWIDTH,BRICKHEIGHT);
+          }
+            
         }
-		        if (bricks[i][j] == 2) {
-          ctx.drawImage(wine,(j*BRICKWIDTH),i * BRICKHEIGHT ,BRICKWIDTH,BRICKHEIGHT);
-          //rect((j * (BRICKWIDTH + PADDING)) + PADDING,
-            //(i * (BRICKHEIGHT + PADDING)) + PADDING,
-            //BRICKWIDTH, BRICKHEIGHT);
+		    if (i == 1) {
+          if(bricks[i][j] != 0)
+            //ctx.drawImage(coctail,j*BRICKWIDTH,i * BRICKHEIGHT ,BRICKWIDTH,BRICKHEIGHT);
+          rect((j * (BRICKWIDTH + PADDING)) + PADDING,
+            (i * (BRICKHEIGHT + PADDING)) + PADDING,
+          BRICKWIDTH, BRICKHEIGHT);
         }
-		        if (bricks[i][j] == 3) {
-          ctx.drawImage(wine,(j*BRICKWIDTH),i * BRICKHEIGHT ,BRICKWIDTH,BRICKHEIGHT);
-          //rect((j * (BRICKWIDTH + PADDING)) + PADDING,
-            //(i * (BRICKHEIGHT + PADDING)) + PADDING,
-            //BRICKWIDTH, BRICKHEIGHT);
+        if(i == 2){
+		      if (bricks[i][j] != 0) 
+           // ctx.drawImage(wine,j*BRICKWIDTH,i * BRICKHEIGHT ,BRICKWIDTH,BRICKHEIGHT);
+          rect((j * (BRICKWIDTH + PADDING)) + PADDING,
+            (i * (BRICKHEIGHT + PADDING)) + PADDING,
+            BRICKWIDTH, BRICKHEIGHT);
         }
       }
     }
@@ -95,15 +102,22 @@ function drawIt() {
     //Če smo zadeli opeko, vrni povratno kroglo in označi v tabeli, da opeke ni več
     if (y < NROWS * rowheight && row >= 0 && col >= 0 && bricks[row][col] != 0) {
       dy = -dy; bricks[row][col] -= 1;
-      tocke += 1;
-      console.log(tocke); //v primeru, da imajo opeko večjo utež lahko prištevate tudi npr. 2 ali 3; pred tem bi bilo smiselno dodati še kakšen pogoj, ki bi signaliziral mesta opek, ki imajo višjo vrednost
+      if(bricks[row][col] == 0){
+        if(row == 2)
+          tocke += 5;
+        else if(row == 1)
+          tocke += 10;
+        else
+          tocke += 15;
+      }
+   //v primeru, da imajo opeko večjo utež lahko prištevate tudi npr. 2 ali 3; pred tem bi bilo smiselno dodati še kakšen pogoj, ki bi signaliziral mesta opek, ki imajo višjo vrednost
       $("#tocke").html("Points: " + tocke);
     }
     if (x + dx > WIDTH - r || x + dx < 0 + r)
       dx = -dx;
     if (y + dy < 0 + r)
       dy = -dy;
-    else if (y + dy > HEIGHT - r) {
+    else if (y + dy > HEIGHT -paddleh/2 - r) {
       if (x > paddlex && x < paddlex + paddlew) {
         dx = 8 * ((x - (paddlex + paddlew / 2)) / paddlew);
         dy = -dy;
@@ -123,8 +137,8 @@ function drawIt() {
   initbricks();
   function init_paddle() {
     paddlex = WIDTH / 2;
-    paddleh = 10;
-    paddlew = 75;
+    paddleh = 20;
+    paddlew = 120;
   }
   function init_mouse() {
     canvasMinX = $("#canvas").offset().left;
@@ -148,6 +162,12 @@ function timer() {
 
   $("#cas").html(izpisTimer);
 }
+var keg = new Image();
+keg.src = "img/keg.png";
+var coctail = new Image();
+coctail.src = "img/cocktail.png";
+var beer = new Image();
+beer.src = "img/beer.png";
 var wine = new Image();
 wine.src = "img/wine.png";
 var paddlex;
@@ -174,15 +194,22 @@ function initbricks() {
   NROWS = 3;
   NCOLS = 15;
   BRICKWIDTH = (WIDTH / NCOLS) ;
-  BRICKHEIGHT = 80;
-  PADDING = 15;
+  BRICKHEIGHT = 20;
+  PADDING = 1;
   bricks = new Array(NROWS);
+  console.log(Math.floor(NCOLS/2));
   for (i = 0; i < NROWS; i++) {
     bricks[i] = new Array(NCOLS);
     for (j = 0; j < NCOLS; j++) {
-	  if(i == 0)
-		bricks[i][j] = 3;
-	  else if(i == 2)
+	  if(i == 0){
+      if(j ==  Math.floor(NCOLS/2)){
+		    bricks[i][j] = 5;
+        console.log("ja");
+      }
+      else
+        bricks[i][j] = 3;
+    }
+	  else if(i == 1)
 		bricks[i][j] = 2;
 	else 
 		bricks[i][j] = 1;
