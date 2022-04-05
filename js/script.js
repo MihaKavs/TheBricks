@@ -12,8 +12,8 @@ function drawIt() {
   var y = 300;
   var dx = 2;
   var dy = 4;
-  var WIDTH = 800;
-  var HEIGHT = 800;
+  var WIDTH;
+  var HEIGHT;
   var r = 10;
   var ctx;
   
@@ -31,7 +31,7 @@ function drawIt() {
     return interval = setInterval(draw, 10);
   }
   function circle(x, y, r) {
-    ctx.fillStyle = "#55D1EA";
+    ctx.fillStyle = "#a60100";
     ctx.beginPath();
     ctx.arc(x, y, r, 0, Math.PI * 2, true);
     ctx.closePath();
@@ -64,34 +64,34 @@ function drawIt() {
         paddlex = 0;
       }
     }
-    rect(paddlex, HEIGHT - paddleh, paddlew, paddleh);
+    ctx.drawImage(plate,paddlex, HEIGHT - paddleh, paddlew, paddleh);
     for (i = 0; i < NROWS; i++) {
       for (j = 0; j < NCOLS; j++) {
         if (i == 0) {
           if(bricks[i][j] != 0){
-            rect((j * (BRICKWIDTH + PADDING)) + PADDING,
+            /*rect((j * (BRICKWIDTH + PADDING)) + PADDING,
             (i * (BRICKHEIGHT + PADDING)) + PADDING,
-            BRICKWIDTH, BRICKHEIGHT);
-            //if(j ==  Math.floor(NCOLS/2))
-              //ctx.drawImage(keg,j*BRICKWIDTH,i * BRICKHEIGHT ,BRICKWIDTH,BRICKHEIGHT);
-            //else
-             // ctx.drawImage(beer,j*BRICKWIDTH,i * BRICKHEIGHT ,BRICKWIDTH,BRICKHEIGHT);
+            BRICKWIDTH, BRICKHEIGHT);*/
+            if(j ==  Math.floor(NCOLS/2))
+              ctx.drawImage(keg,j*BRICKWIDTH,i * BRICKHEIGHT ,BRICKWIDTH,BRICKHEIGHT);
+            else
+             ctx.drawImage(beer,j*BRICKWIDTH,i * BRICKHEIGHT ,BRICKWIDTH,BRICKHEIGHT);
           }
             
         }
 		    if (i == 1) {
           if(bricks[i][j] != 0)
-            //ctx.drawImage(coctail,j*BRICKWIDTH,i * BRICKHEIGHT ,BRICKWIDTH,BRICKHEIGHT);
-          rect((j * (BRICKWIDTH + PADDING)) + PADDING,
+            ctx.drawImage(coctail,j*BRICKWIDTH,i * BRICKHEIGHT ,BRICKWIDTH,BRICKHEIGHT);
+          /*rect((j * (BRICKWIDTH + PADDING)) + PADDING,
             (i * (BRICKHEIGHT + PADDING)) + PADDING,
-          BRICKWIDTH, BRICKHEIGHT);
+          BRICKWIDTH, BRICKHEIGHT);*/
         }
         if(i == 2){
 		      if (bricks[i][j] != 0) 
-           // ctx.drawImage(wine,j*BRICKWIDTH,i * BRICKHEIGHT ,BRICKWIDTH,BRICKHEIGHT);
-          rect((j * (BRICKWIDTH + PADDING)) + PADDING,
+           ctx.drawImage(wine,j*BRICKWIDTH,i * BRICKHEIGHT ,BRICKWIDTH,BRICKHEIGHT);
+          /*rect((j * (BRICKWIDTH + PADDING)) + PADDING,
             (i * (BRICKHEIGHT + PADDING)) + PADDING,
-            BRICKWIDTH, BRICKHEIGHT);
+            BRICKWIDTH, BRICKHEIGHT);*/
         }
       }
     }
@@ -99,6 +99,8 @@ function drawIt() {
     colwidth = BRICKWIDTH  + r / 2;
     row = Math.floor(y / rowheight);
     col = Math.floor(x / colwidth);
+    //console.log(col);
+    //console.log(Math.floor(NCOLS/2));
     //Če smo zadeli opeko, vrni povratno kroglo in označi v tabeli, da opeke ni več
     if (y < NROWS * rowheight && row >= 0 && col >= 0 && bricks[row][col] != 0) {
       dy = -dy; bricks[row][col] -= 1;
@@ -107,6 +109,8 @@ function drawIt() {
           tocke += 5;
         else if(row == 1)
           tocke += 10;
+        else if(row == 0 && col == Math.floor(NCOLS/2))
+          tocke += 100;
         else
           tocke += 15;
       }
@@ -135,9 +139,10 @@ function drawIt() {
   init_paddle();
   init_mouse();
   initbricks();
+  calculatePionts();
   function init_paddle() {
     paddlex = WIDTH / 2;
-    paddleh = 20;
+    paddleh = 30;
     paddlew = 120;
   }
   function init_mouse() {
@@ -170,6 +175,8 @@ var beer = new Image();
 beer.src = "img/beer.png";
 var wine = new Image();
 wine.src = "img/wine.png";
+var plate = new Image();
+plate.src = "img/plate.png";
 var paddlex;
 var paddleh;
 var paddlew;
@@ -182,6 +189,10 @@ var minuteI;
 var intTimer;
 var izpisTimer;
 var start = true;
+var maxPoints;
+var remainingPoints;
+var procentageOfPoints;
+var drunkHeight;
 
 var bricks;
 var NROWS;
@@ -192,9 +203,9 @@ var PADDING;
 function initbricks() {
   WIDTH = $("#canvas").width();
   NROWS = 3;
-  NCOLS = 15;
-  BRICKWIDTH = (WIDTH / NCOLS) ;
-  BRICKHEIGHT = 20;
+  NCOLS = 8;
+  BRICKWIDTH = (WIDTH / NCOLS) -1 ;
+  BRICKHEIGHT = 70;
   PADDING = 1;
   bricks = new Array(NROWS);
   console.log(Math.floor(NCOLS/2));
@@ -215,6 +226,15 @@ function initbricks() {
 		bricks[i][j] = 1;
     }
   }
+}
+function calculatePionts(){
+  maxPoints = 100+(NCOLS-1)*15+NCOLS*10+NCOLS*5;
+}
+function sliderHeight(){
+  remainingPoints = maxPoints-tocke;
+  procentageOfPoints = Math.floor(remainingPoints/maxPoints);
+  procentageOfPoints = 1-procentageOfPoints;
+  drunkHeight = procentageOfPoints*200;
 }
 var rightDown = false;
 var leftDown = false;

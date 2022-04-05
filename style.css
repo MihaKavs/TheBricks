@@ -50,7 +50,7 @@ body{
 .wine{
     position: absolute;
     background-image: url(img/wine.png);
-    background-size: 46%;
+    background-size: 55%;
     background-repeat: no-repeat;
     background-position-y: 75%;
     background-position-x: 45%;
@@ -63,7 +63,7 @@ body{
     background-image: url(img/cocktail.png);
     background-size: 100%;
     background-repeat: no-repeat;
-    background-position-y: 83%;
+    background-position-y: 75%;
     background-position-x: 45%;
     top: 50%;
     right: -33%;
@@ -131,7 +131,4 @@ body{
     background-position-y: -200%;
     background-repeat: no-repeat;
     border-radius: 0.5em;
-}
-canvas{
-    width: 100%;
 }
