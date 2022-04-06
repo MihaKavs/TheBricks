@@ -16,7 +16,25 @@ function drawIt() {
   var HEIGHT;
   var r = 10;
   var ctx;
+  function win(){
+    clearInterval(intTimer);
+    clearInterval(interval);
+    var ctx;
+    ctx = $('#canvas')[0].getContext("2d");
+    WIDTH = $("#canvas").width();
+    HEIGHT = $("#canvas").height();
+    ctx.clearRect(0, 0, WIDTH, HEIGHT);
+    circle(x, y, 10);
+    Swal.fire({
+      title: 'Congratulations you won!!',
+      confirmButtonText: 'Restart',
+      color: '#000000',
+      confirmButtonColor: '#000000',
+    }).then((result) => {
+      countdown = setInterval(countdown,10);
   
+    })
+  }
   function init() {
     ctx = $('#canvas')[0].getContext("2d");
     document.getElementById("center").style.width = "60%";
@@ -24,7 +42,7 @@ function drawIt() {
     HEIGHT = $("#canvas").height();
 
     tocke = 0;
-    $("#tocke").html("Points: " + tocke);
+    $("#tocke").html("Points: " + "<br/>" +  tocke);
     sekunde = 0;
     izpisTimer = "00:00";
     intTimer = setInterval(timer, 1000);
@@ -103,6 +121,7 @@ function drawIt() {
     //console.log(Math.floor(NCOLS/2));
     //Če smo zadeli opeko, vrni povratno kroglo in označi v tabeli, da opeke ni več
     if (y < NROWS * rowheight && row >= 0 && col >= 0 && bricks[row][col] != 0) {
+      win();
       dy = -dy; bricks[row][col] -= 1;
       if(bricks[row][col] == 0){
         if(row == 2)
@@ -110,12 +129,15 @@ function drawIt() {
         else if(row == 1)
           tocke += 10;
         else if(row == 0 && col == Math.floor(NCOLS/2))
-          tocke += 100;
+          tocke += 50;
         else
           tocke += 15;
+        sliderHeight();
+        if(document.getElementById("slider").style.backgroundPositionY == "0%")
+          win();
       }
    //v primeru, da imajo opeko večjo utež lahko prištevate tudi npr. 2 ali 3; pred tem bi bilo smiselno dodati še kakšen pogoj, ki bi signaliziral mesta opek, ki imajo višjo vrednost
-      $("#tocke").html("Points: " + tocke);
+      $("#tocke").html("Points: " + "<br/>" +  tocke);
     }
     if (x + dx > WIDTH - r || x + dx < 0 + r)
       dx = -dx;
@@ -193,6 +215,8 @@ var maxPoints;
 var remainingPoints;
 var procentageOfPoints;
 var drunkHeight;
+var fixedPoints;
+var fulDrunkHeight;
 
 var bricks;
 var NROWS;
@@ -205,7 +229,7 @@ function initbricks() {
   NROWS = 3;
   NCOLS = 8;
   BRICKWIDTH = (WIDTH / NCOLS) -1 ;
-  BRICKHEIGHT = 70;
+  BRICKHEIGHT = 80;
   PADDING = 1;
   bricks = new Array(NROWS);
   console.log(Math.floor(NCOLS/2));
@@ -228,13 +252,28 @@ function initbricks() {
   }
 }
 function calculatePionts(){
-  maxPoints = 100+(NCOLS-1)*15+NCOLS*10+NCOLS*5;
+  maxPoints = 50+(NCOLS-1)*15+NCOLS*10+NCOLS*5;
 }
 function sliderHeight(){
   remainingPoints = maxPoints-tocke;
-  procentageOfPoints = Math.floor(remainingPoints/maxPoints);
-  procentageOfPoints = 1-procentageOfPoints;
-  drunkHeight = procentageOfPoints*200;
+  procentageOfPoints = remainingPoints/maxPoints;
+  fixedPoints = procentageOfPoints.toFixed(2);
+  fixedPoints = 1-fixedPoints;
+  drunkHeight = fixedPoints*200;
+  fulDrunkHeight = drunkHeight.toFixed();
+  fulDrunkHeight = 200-fulDrunkHeight;
+  document.getElementById("slider").style.backgroundPositionY = -fulDrunkHeight+ "%";
+}
+
+function countdown(){
+  tocke--;
+  sliderHeight();
+  if(tocke == 0){
+    sekunde = 0;
+    intTimer = setInterval(timer, 1000);
+    return interval = setInterval(draw, 10);
+  }
+
 }
 var rightDown = false;
 var leftDown = false;

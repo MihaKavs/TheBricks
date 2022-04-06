@@ -110,7 +110,10 @@ body{
     font-size: x-large;
     font-family: drink;
 }
-
+.fontStylingPoints{
+    font-size: xx-large;
+    font-family: drink;
+}
 @font-face {
     font-family: drink;
     src: url(font.ttf);
@@ -128,7 +131,7 @@ body{
     width: 100%;
     top: 0%;
     background-image: url(img/slider.jpg), linear-gradient(to bottom, rgba(255, 229, 12, 0.7), rgba(0,0,0,0));
-    background-position-y: -200%;
+    background-position-y: 0%;
     background-repeat: no-repeat;
     border-radius: 0.5em;
 }
