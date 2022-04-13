@@ -7,14 +7,6 @@ body{
     height: 100%;
     background-image: linear-gradient(to bottom, rgba(255, 229, 12, 0.7), rgba(0,0,0,0))
   }
-.overlay{
-    background-color: rgba(0,0,0,0);
-    position:fixed;
-    left:0;
-    top: 0;
-    width:100%;
-    height:100%;
-}
 .center{
     position: absolute;
     left: 5%;
@@ -48,7 +40,7 @@ body{
 .wine{
     position: absolute;
     background-image: url(img/wine.png);
-    background-size: 55%;
+    background-size: 98%;
     background-repeat: no-repeat;
     background-position-y: 75%;
     background-position-x: 45%;
@@ -82,7 +74,7 @@ body{
 .drink{
     position: absolute;
     background-image: url(img/keg.png);
-    background-size: 80%;
+    background-size: 55%;
     background-repeat: no-repeat;
     background-position-y: 80%;
     background-position-x: 45%;
@@ -120,8 +112,9 @@ body{
     position: absolute;
     top: 5%;
     height: 10%;
-    width: 100%;
+    width: 95%;
     font-size: 3em;
+    font-family: drink;
 }
 .pivo{
     height:100%;
@@ -131,6 +124,36 @@ body{
     background-position-y: -200%;
     background-repeat: no-repeat;
     border-radius: 0.5em;
+}
+.swal2-title{
+    font-size: 3rem !important;
+    font-family: drink;
+  }
+  .swal2-button{
+    font-size: 1.6rem !important;
+    font-family: drink;
+  }
+  .swal2-text {
+    font-size: 1em;
+    font-family: drink;
+  }
+.restart{
+    position: absolute;
+    border: 2px solid;
+    border-radius: 0.5em;
+    top: 93%;
+    height: 6%;
+    width: 50%;
+    left: 5%;
+    line-height: 2em;
+}
+.restart p{
+    margin: 0%;
+    height: 100%;;
+}
+.restart :hover{
+    color: red;
+    cursor: pointer;
 }
 .points{
     position: absolute;
