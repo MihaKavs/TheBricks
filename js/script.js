@@ -82,6 +82,7 @@ function drawIt() {
         paddlex = 0;
       }
     }
+    paddleDrunknes();
     ctx.drawImage(plate,paddlex, HEIGHT - paddleh, paddlew, paddleh);
     for (i = 0; i < NROWS; i++) {
       for (j = 0; j < NCOLS; j++) {
@@ -121,7 +122,6 @@ function drawIt() {
     //console.log(Math.floor(NCOLS/2));
     //Če smo zadeli opeko, vrni povratno kroglo in označi v tabeli, da opeke ni več
     if (y < NROWS * rowheight && row >= 0 && col >= 0 && bricks[row][col] != 0) {
-      win();
       dy = -dy; bricks[row][col] -= 1;
       if(bricks[row][col] == 0){
         if(row == 2)
@@ -274,6 +274,31 @@ function countdown(){
     return interval = setInterval(draw, 10);
   }
 
+}
+var texts = document.getElementsByClassName("fontStyling");
+var randomX;
+function paddleDrunknes(){
+  if(fixedPoints >= 0.1 && fixedPoints <0.25){
+    randomX = Math.floor(Math.random()*3-1);
+    for (let i = 0; i < 3; i++) 
+      texts[i].style.left = randomX + "px";
+    paddlex = paddlex + randomX;
+  }else if(fixedPoints >= 0.25 && fixedPoints <0.5){
+    randomX = Math.floor(Math.random()*5-2)
+    paddlex = paddlex + randomX;
+    for (let i = 0; i < 3; i++) 
+      texts[i].style.left = randomX + "px";
+  }else if(fixedPoints >= 0.5 && fixedPoints <0.75){
+    randomX = Math.floor(Math.random()*15-7)
+    paddlex = paddlex + randomX;
+    for (let i = 0; i < 3; i++) 
+      texts[i].style.left = randomX + "px";
+  }else if(fixedPoints >= 0.75){
+    randomX = Math.floor(Math.random()*25-12)
+    paddlex = paddlex + randomX;
+    for (let i = 0; i < 3; i++) 
+      texts[i].style.left = randomX + "px";
+  }
 }
 var rightDown = false;
 var leftDown = false;

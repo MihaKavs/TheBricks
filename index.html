@@ -9,39 +9,40 @@
     <link rel="icon" href="img/beer.png" type="image/x-icon">
 </head>
 <body onload="drawIt()">
-    <div class="title">
-        Drinking bricks!
-    </div>
-    <div id="center" class="center">
-        <canvas id="canvas" width="1000" height="650"></canvas>
-        <script src="js/script.js"></script>
-    </div>
-    <div class="score">
-    <div class="pivo" id="slider"></div>
-    </div>
-    <div class="scoreboard">
-        <div id="tocke" class="points fontStylingPoints">
-            Points: <br/> 0
+    <div class="overlay" id="overlay">
+        <div class="title fontStyling" id="title">
+            Drinking bricks!
         </div>
-        <div id="cas" class="time fontStylingPoints">
-            Time: 00:00
+        <div id="center" class="center">
+            <canvas id="canvas" width="1000" height="650"></canvas>
+            <script src="js/script.js"></script>
         </div>
-        <div class="wine fontStyling">
-            5   points
+        <div class="score">
+        <div class="pivo" id="slider"></div>
         </div>
-        <div class="vodka fontStyling">
-            10 points
-        </div>
-        <div class="beer fontStyling">
-            15 points
-        </div>
-        <div class="drink fontStyling">
-            50 points
-        </div>
-        <div onclick="creddit()" class="creddits">
+        <div class="scoreboard">
+            <div id="tocke" class="points fontStyling">
+                Points: <br/> 0
+            </div>
+            <div id="cas" class="time fontStyling">
+                Time: 00:00
+            </div>
+            <div class="wine fontStyling">
+                5   points
+            </div>
+            <div class="vodka fontStyling">
+                10 points
+            </div>
+            <div class="beer fontStyling">
+                15 points
+            </div>
+            <div class="drink fontStyling">
+                50 points
+            </div>
+            <div onclick="creddit()" class="creddits">
 
+            </div>
         </div>
     </div>
-
 </body>
 </html>
