@@ -33,6 +33,7 @@ function countdown() {
 function lose() {
   Swal.fire({
     allowOutsideClick: false,
+
     title: 'Uh oh you lost!!' + '<br/>' + 'You got: ' + tocke + ' points' + '<br/>' + 'Time: ' + izpisTimer,
     confirmButtonText: 'Restart',
     showDenyButton: true,
@@ -72,7 +73,7 @@ function win() {
 }
 function init() {
   ctx = $('#canvas')[0].getContext("2d");
-  document.getElementById("center").style.width = "60%";
+  document.getElementById("center").style.width = "63%";
   WIDTH = $("#canvas").width();
   HEIGHT = $("#canvas").height();
 
