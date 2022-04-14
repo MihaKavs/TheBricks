@@ -32,6 +32,7 @@ function countdown() {
 }
 function lose() {
   Swal.fire({
+    allowOutsideClick: false,
     title: 'Uh oh you lost!!' + '<br/>' + 'You got: ' + tocke + ' points' + '<br/>' + 'Time: ' + izpisTimer,
     confirmButtonText: 'Restart',
     showDenyButton: true,
