@@ -40,7 +40,7 @@ body{
 .wine{
     position: absolute;
     background-image: url(img/wine.png);
-    background-size: 98%;
+    background-size: 75%;
     background-repeat: no-repeat;
     background-position-y: 75%;
     background-position-x: 45%;
@@ -51,7 +51,7 @@ body{
 .vodka{
     position: relative;
     background-image: url(img/cocktail.png);
-    background-size: 100%;
+    background-size: 75%;
     background-repeat: no-repeat;
     background-position-y: 75%;
     background-position-x: 45%;
@@ -66,6 +66,7 @@ body{
     background-size: contain;
     background-repeat: no-repeat;
     background-position-y: 75%;
+    background-size: 75%;
     top: 50%;
     right: 0%;
     height: 25%;
@@ -74,7 +75,7 @@ body{
 .drink{
     position: absolute;
     background-image: url(img/keg.png);
-    background-size: 55%;
+    background-size: 40%;
     background-repeat: no-repeat;
     background-position-y: 80%;
     background-position-x: 45%;

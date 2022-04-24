@@ -1,6 +1,6 @@
 function creddit() {
   Swal.fire({
-    title: 'Made Miha Kavs',
+    title: 'Made by Miha Kavs',
     confirmButtonText: 'Okej',
     text: 'This game was made for a school project.',
     color: '#000000',
@@ -84,9 +84,12 @@ function init() {
   intTimer = setInterval(timer, 1000);
   return interval = setInterval(draw, 10);
 }
-function circle(x, y, r) {
+function circle(x, y, r, layer) {
   ctx.globalAlpha = 1;
-  ctx.fillStyle = "#a60100";
+  if(layer == 1)
+    ctx.fillStyle = "#d1670b";
+  else
+    ctx.fillStyle = "#f4ac17";
   ctx.beginPath();
   ctx.arc(x, y, r, 0, Math.PI * 2, true);
   ctx.closePath();
@@ -99,7 +102,8 @@ function clear() {
 var countDown;
 function draw() {
   clear();
-  circle(x, y, 10);
+  circle(x, y, 10 ,1);
+  circle(x, y, 8 ,2);
   if (rightDown) {
     if ((paddlex + paddlew) < WIDTH) {
       paddlex += 5;
